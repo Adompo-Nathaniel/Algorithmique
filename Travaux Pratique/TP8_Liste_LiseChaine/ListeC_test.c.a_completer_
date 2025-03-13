@@ -1,0 +1,117 @@
+/* Ch Jaillet
+ * projet : TDA sequentiels
+ * fichier : ListeC_test.c (ListeC = Liste avec curseur)
+ * date : 2023/2024
+ *******************
+ */
+
+/* Rappel : les 2 remedes pour l'implem. des listes [listes avec curseur]
+ * - remede 1
+ *		chainage simple
+ * 		la tete de lecture est sur la cellule precedant la cellule visee
+ * - remede 2
+ * 		physiquement la tete de lecture est sur la Cellule2 visee
+ *		chainage double
+ */
+
+// choisissez : 0 pour implem par tableau
+//	sinon chainage 
+//			 => 1 pour "remede 1" ; 2 pour "remede 2"	
+#define VERSION 0
+
+#include "Element.h"
+#include "ListeC.h"
+
+#if VERSION == 1
+	#include "ListeC_ch1.h"
+#elif VERSION == 2
+	#include "ListeC_ch2.h"
+#else	// VERSION == 0
+	#include "ListeC_tab.h"
+#endif
+
+#include <stdio.h>
+
+/////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+//////////////////////////////
+// fonctions calculables
+// A. leurs declarations (definitions a la fin)
+void viderL(ListeC *);
+
+// pour les deux suivantes on passe le ptr 
+//		pour etre homogene avec les versions pour les piles / files
+int  tailleL(ListeC *);
+void afficherL(ListeC *);
+
+/////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+//////////////////////////////
+// B. le programme de test 
+// definitions des fonctions calculables a la fin
+int main(void)
+{	ListeC lc; 
+	Element e;
+	
+	creerListeC(&lc);
+	for(int i=0 ; i<10 ; i++)
+	{	saisie(&e);
+		inserer(&lc, e);
+	}
+
+	printf("contenu apres remplissage : ");
+		afficherL(&lc);	// cette fois le contenu de la struct. ne change pas
+		// mais on passe quand meme l'adresse
+		// 		pour respecter la notation imposee pour les piles / files
+
+	printf("\n\t => taille (2 fois) : %d %d\n", tailleL(&lc), tailleL(&lc));
+	printf("contenu apres taille : "); 	afficherL(&lc);
+
+	printf("\non va au debut et on supprime : "); 
+	allerDebut(&lc); supprimer(&lc); 
+	afficherL(&lc);
+	printf("\n\t => taille : %d\n", tailleL(&lc));
+	
+	printf("on avance 2 fois, on en supprime 2 et on en ajoute 1 : "); 
+	avancer(&lc); avancer(&lc); supprimer(&lc); supprimer(&lc); saisie(&e); inserer(&lc,e);
+	afficherL(&lc);
+	printf("\n\t => taille : %d\n", tailleL(&lc));
+
+	viderL(&lc);
+	printf("contenu apres vidage : "); 		afficherL(&lc);
+	printf("\n\t => taille : %d\n", tailleL(&lc));
+	
+	libererListeC(&lc);
+	return 0;
+}
+
+/////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+//////////////////////////////
+// fonctions calculables
+// C. leurs definitions (declarations au debut de ce fichier)
+
+void viderL(ListeC *plc)
+{	// aller au debut et tout supprimer (un par un)
+}
+
+int  tailleL(ListeC *plc)
+{	// aller au debut et parcourir l'ensemble
+	// apres il faut pour se remettre au bon endroit 
+	// 	=> il faut d'abord avoir compte la fin
+	//	   pour ensuite repartir du debut et avancer du bon nb de cases
+	int nbFin = 0, nbTotal = 0;
+	// 1. ? nbFin
+	...
+	// 2. ? nbotal
+	...
+	// 3. se remettre au bon endroit
+	
+	return nbTotal;
+}
+
+void afficherL(ListeC *plc)
+{	// la aussi il faudra se remettre au bon endroit
+	// 	=> nbFin et nbTotal necessaires aussi ici
+	...
+}
