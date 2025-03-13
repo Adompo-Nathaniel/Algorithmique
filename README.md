@@ -1,4 +1,4 @@
-# Algorithmique (INFO0401)
+# Algorithmique 
 
 Ce cours d’algorithmique a été suivi lors du second semestre de ma deuxième année de licence informatique. Il vise à approfondir la conception et l'analyse d'algorithmes efficaces pour résoudre divers problèmes informatiques.
 
